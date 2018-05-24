@@ -1,26 +1,29 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Match {
-    private Team localTeam;
-    private Team visitTeam;
-    private Score score;
+    private Map<Team, Integer> teams;
 
     public Match(Team localTeam, Team visitTeam) {
-        this.localTeam = localTeam;
-        this.visitTeam = visitTeam;
+        this.teams = new HashMap<>();
+        teams.put(localTeam, 0);
+        teams.put(visitTeam, 0);
     }
 
-    public void setScore(Score score) {
-        this.score = score;
+    public void increaseScore(Team team, int score) {
+        this.teams.put(team, this.teams.get(team) + score);
     }
 
-    public Score getScore() {
-        return score;
+    public void decreaseScore(Team team, int score) {
+        this.teams.put(team, this.teams.get(team) - score);
     }
 
-    public Team getLocalTeam() {
-        return localTeam;
+
+    public int getTeamScore(Team team) {
+        return this.teams.get(team);
     }
 
-    public Team getVisitTeam() {
-        return visitTeam;
+    public Map<Team, Integer> getResults() {
+        return this.teams;
     }
 }
